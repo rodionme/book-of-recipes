@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ingredients</title>
-</head>
-<body>
+{% extends 'recipes/base.html' %}
+
+{% block title %}Ingredients{% endblock %}
+
+{% block content %}
     {% if ingredients %}
         <ul>
         {% for ingredient in ingredients %}
@@ -14,5 +12,4 @@
     {% else %}
         <p>No ingredients are available.</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}

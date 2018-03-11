@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Recipe</title>
-</head>
-<body>
+{% extends 'recipes/base.html' %}
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block content %}
     <p>{{ recipe.name }} recipe page</p>
-</body>
-</html>
+{% endblock %}

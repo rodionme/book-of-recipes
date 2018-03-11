@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Recipes</title>
-</head>
-<body>
+{% extends 'recipes/base.html' %}
+
+{% block title %}Recipes{% endblock %}
+
+{% block content %}
     {% if recipes %}
         <ul>
         {% for recipe in recipes %}
@@ -14,5 +12,4 @@
     {% else %}
         <p>No recipes are available.</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}
