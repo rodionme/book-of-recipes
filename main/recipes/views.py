@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Recipe, Ingredient
 
 
@@ -13,7 +13,7 @@ def recipes(request):
 
 
 def recipe(request, recipe_id):
-    recipe = Recipe.objects.get(id=recipe_id)
+    recipe = get_object_or_404(Recipe, id=recipe_id)
 
     return render(request, 'recipes/recipe.html', {'recipe': recipe})
 
@@ -25,6 +25,6 @@ def ingredients(request):
 
 
 def ingredient(request, ingredient_id):
-    ingredient = Ingredient.objects.get(id=ingredient_id)
+    ingredient = get_object_or_404(Ingredient, id=ingredient_id)
 
     return render(request, 'recipes/ingredient.html', {'ingredient': ingredient})
