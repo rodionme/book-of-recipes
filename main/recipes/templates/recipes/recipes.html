@@ -3,13 +3,66 @@
 {% block title %}Recipes{% endblock %}
 
 {% block content %}
+  <header class="main-header">
+    <a href="/" class="logo">Book of Recipes</a>
+
+    <div class="search-wrapper">
+      <input class="search" type="text" placeholder="Input recipe name" />
+    </div>
+
+    <div class="main-menu">
+      <button class="hamburger hamburger--spring" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+
+      <ul class="menu-items-list">
+        <li><a href="{% url 'recipes' %}">Recipes</a></li>
+        <li><a href="{% url 'ingredients' %}">Ingredients</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="divider divider-1"></div>
+
+  <section class="content">
+    <main class="main-content">
     {% if recipes %}
-        <ul>
-        {% for recipe in recipes %}
-            <li><a href="{% url 'recipe' recipe.id %}">{{ recipe.name }}</a></li>
-        {% endfor %}
-        </ul>
+      <section class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Cousine</th>
+              <th>Ingredients</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          {% for recipe in recipes %}
+            <tr>
+              <td><a href="{% url 'recipe' recipe.id %}">{{ recipe.name }}</a></td>
+              <td><span>Recipe cousine will be here</span></td>
+              <td><span>Recipe ingredients will be here</span></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </section>
     {% else %}
-        <p>No recipes are available.</p>
+      <p class="no-data-available">No recipes are available.</p>
     {% endif %}
+    </main>
+
+    <aside class="filters">
+      <h4>Filters will be here</h4>
+
+      <ul class="filter-list">
+        <li><label><input type="checkbox" name=""><span>Filter 1</span></label></li>
+        <li><label><input type="checkbox" name=""><span>Filter 2</span></label></li>
+        <li><label><input type="checkbox" name=""><span>Filter 3</span></label></li>
+      </ul>
+    </aside>
+  </section>
 {% endblock %}
