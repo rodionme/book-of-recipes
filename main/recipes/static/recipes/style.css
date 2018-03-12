@@ -6,6 +6,7 @@ body {
 body {
   display: flex;
   flex-direction: column;
+  min-width: 780px;
   min-height: 600px;
   margin: 0;
   font-size: 16px;
@@ -24,6 +25,7 @@ a {
 
 input,
 button {
+  font-family: inherit;
   outline: none;
 }
 
@@ -36,10 +38,17 @@ button {
 }
 
 .divider-1 {
-  width: 702px;
-  height: 11px;
+  width: 50px;
+  height: 392px;
   margin: 20px auto;
-  background-image: url("images/divider-1.png");
+  background: url("images/divider-1.svg") no-repeat;
+}
+
+.divider-2 {
+  width: 780px;
+  height: 36px;
+  margin: 20px auto;
+  background: url("images/divider-2.svg") no-repeat;
 }
 
 
@@ -234,6 +243,8 @@ thead {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  overflow-y: scroll;
+  padding-bottom: 20px;
 }
 
 tbody {
@@ -260,6 +271,39 @@ td {
   display: inline-block;
 }
 
+.recipes-table {
+  font-size: 150%;
+}
+
+.recipes-table th {
+  color: #999;
+}
+
+.col-name {
+  width: 40%;
+}
+
+.col-cousine {
+  width: 10%;
+  min-width: 100px;
+}
+
+.col-ingredients {
+  width: 50%;
+}
+
+.recipes-table a {
+  text-decoration: none;
+}
+
+.recipes-table a:hover {
+  text-decoration: underline;
+}
+
+.ingredients {
+  font-size: 70%;
+}
+
 
 /*******************************/
 /* FILTERS                     */
@@ -268,7 +312,7 @@ td {
   width: 200px;
   flex-shrink: 0;
   padding-left: 40px;
-  border-left: 1px solid #ccc;
+  font-size: 150%;
 }
 
 .filter-list {
