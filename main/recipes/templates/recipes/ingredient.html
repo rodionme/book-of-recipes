@@ -3,5 +3,7 @@
 {% block title %}{{ ingredient.name }}{% endblock %}
 
 {% block content %}
-    <p>Name: {{ ingredient.name }}</p>
+  <p>Name: {{ ingredient.name }}</p>
+
+  <a href="{% url 'edit_ingredient' ingredient.id %}">Edit</a>
 {% endblock %}

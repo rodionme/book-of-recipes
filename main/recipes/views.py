@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import Recipe, Ingredient
 
 
@@ -19,6 +21,12 @@ def recipe(request, recipe_id):
     return render(request, 'recipes/recipe.html', {'recipe': recipe, 'ingredients': ingredients})
 
 
+def edit_recipe(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+
+    return render(request, 'recipes/edit-recipe.html', {'recipe': recipe})
+
+
 def ingredients(request):
     ingredients = Ingredient.objects.all()
 
@@ -29,3 +37,15 @@ def ingredient(request, ingredient_id):
     ingredient = get_object_or_404(Ingredient, id=ingredient_id)
 
     return render(request, 'recipes/ingredient.html', {'ingredient': ingredient})
+
+
+def edit_ingredient(request, ingredient_id):
+    ingredient = get_object_or_404(Ingredient, id=ingredient_id)
+
+    if request.POST:
+        ingredient.name = request.POST['name']
+        ingredient.save()
+
+        return HttpResponseRedirect(reverse('ingredient', args=(ingredient.id,)))
+
+    return render(request, 'recipes/edit-ingredient.html', {'ingredient': ingredient})
