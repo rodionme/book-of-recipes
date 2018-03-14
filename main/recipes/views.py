@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404, get_list_or_404
-from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
+from django.views import generic
 from .models import Recipe, Ingredient
 
 
@@ -8,44 +8,45 @@ def index(request):
     return render(request, 'recipes/index.html')
 
 
-def recipes(request):
-    recipes = Recipe.objects.all()
+class RecipesView(generic.ListView):
+    template_name = 'recipes/recipes.html'
+    context_object_name = 'recipes'
 
-    return render(request, 'recipes/recipes.html', {'recipes': recipes})
-
-
-def recipe(request, recipe_id):
-    recipe = get_object_or_404(Recipe, id=recipe_id)
-    ingredients = get_list_or_404(Ingredient, recipe__id=recipe.id)
-
-    return render(request, 'recipes/recipe.html', {'recipe': recipe, 'ingredients': ingredients})
+    def get_queryset(self):
+        return Recipe.objects.all()
 
 
-def edit_recipe(request, recipe_id):
-    recipe = get_object_or_404(Recipe, id=recipe_id)
-
-    return render(request, 'recipes/edit-recipe.html', {'recipe': recipe})
-
-
-def ingredients(request):
-    ingredients = Ingredient.objects.all()
-
-    return render(request, 'recipes/ingredients.html', {'ingredients': ingredients})
+class RecipeView(generic.DetailView):
+    model = Recipe
+    template_name = 'recipes/recipe.html'
 
 
-def ingredient(request, ingredient_id):
-    ingredient = get_object_or_404(Ingredient, id=ingredient_id)
+class RecipeUpdate(generic.UpdateView):
+    model = Recipe
+    fields = ['name', 'description', 'ingredients']
+    template_name = 'recipes/edit-recipe.html'
 
-    return render(request, 'recipes/ingredient.html', {'ingredient': ingredient})
+    def get_success_url(self):
+        return reverse('recipe', args=(self.object.id,))
 
 
-def edit_ingredient(request, ingredient_id):
-    ingredient = get_object_or_404(Ingredient, id=ingredient_id)
+class IngredientsView(generic.ListView):
+    template_name = 'recipes/ingredients.html'
+    context_object_name = 'ingredients'
 
-    if request.POST:
-        ingredient.name = request.POST['name']
-        ingredient.save()
+    def get_queryset(self):
+        return Ingredient.objects.all()
 
-        return HttpResponseRedirect(reverse('ingredient', args=(ingredient.id,)))
 
-    return render(request, 'recipes/edit-ingredient.html', {'ingredient': ingredient})
+class IngredientView(generic.DetailView):
+    model = Ingredient
+    template_name = 'recipes/ingredient.html'
+
+
+class IngredientUpdate(generic.UpdateView):
+    model = Ingredient
+    fields = ['name']
+    template_name = 'recipes/edit-ingredient.html'
+
+    def get_success_url(self):
+        return reverse('ingredient', args=(self.object.id,))

@@ -10,8 +10,7 @@
   <form action="" method="post">
     {% csrf_token %}
 
-    <input name="name" type="text" value="{{ recipe.name }}">
-    <textarea name="description" cols="30" rows="10">{{ recipe.description }}</textarea>
+    {{ form.as_p }}
 
     <button type="submit">Save</button>
   </form>
