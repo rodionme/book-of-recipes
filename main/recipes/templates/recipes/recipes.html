@@ -63,13 +63,26 @@
     <div class="divider divider-1"></div>
 
     <aside class="filters">
-      <h4>Filters will be here</h4>
+      <form action="" method="get">
+        <h4>Cuisines</h4>
 
-      <ul class="filter-list">
-        <li><label><input type="checkbox" name=""><span>Filter 1</span></label></li>
-        <li><label><input type="checkbox" name=""><span>Filter 2</span></label></li>
-        <li><label><input type="checkbox" name=""><span>Filter 3</span></label></li>
-      </ul>
+        <ul class="filter-list">
+          {% for cuisine in cuisines %}
+            <li><label><input type="checkbox" name="cuisine[]" value="{{ cuisine.id }}"><span>{{ cuisine.name }}</span></label></li>
+          {% endfor %}
+        </ul>
+
+
+        <h4>Ingredients</h4>
+
+        <ul class="filter-list">
+          {% for ingredient in ingredients %}
+            <li><label><input type="checkbox" name="ingredient[]" value="{{ ingredient.id }}"><span>{{ ingredient.name }}</span></label></li>
+          {% endfor %}
+        </ul>
+
+        <button type="submit">Apply</button>
+      </form>
     </aside>
   </section>
 {% endblock %}

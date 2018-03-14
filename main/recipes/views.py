@@ -15,6 +15,13 @@ class RecipesView(generic.ListView):
     def get_queryset(self):
         return Recipe.objects.all()
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ingredients'] = Ingredient.objects.all()
+        context['cuisines'] = Cuisine.objects.all()
+
+        return context
+
 
 class RecipeView(generic.DetailView):
     model = Recipe
