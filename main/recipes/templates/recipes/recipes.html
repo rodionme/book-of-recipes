@@ -7,7 +7,7 @@
     <a href="/" class="logo">Book of Recipes</a>
 
     <div class="search-wrapper">
-      <input class="search" type="text" placeholder="Input recipe name" />
+      <input class="search" type="text" placeholder="Input recipe name"/>
     </div>
 
     <div class="main-menu">
@@ -20,6 +20,7 @@
       <ul class="menu-items-list">
         <li><a href="{% url 'recipes' %}">Recipes</a></li>
         <li><a href="{% url 'ingredients' %}">Ingredients</a></li>
+        <li><a href="{% url 'cuisines' %}">Cuisines</a></li>
       </ul>
     </div>
   </header>
@@ -28,31 +29,35 @@
 
   <section class="content">
     <main class="main-content">
-    {% if recipes %}
-      <section class="table-wrapper">
-        <table class="recipes-table">
-          <thead>
+      {% if recipes %}
+        <section class="table-wrapper">
+          <table class="recipes-table">
+            <thead>
             <tr>
               <th class="col-name">Name</th>
-              <th class="col-cousine">Cousine</th>
+              <th class="col-cuisine">Cuisine</th>
               <th class="col-ingredients">Ingredients</th>
             </tr>
-          </thead>
+            </thead>
 
-          <tbody>
-          {% for recipe in recipes %}
-            <tr>
-              <td class="name"><a href="{% url 'recipe' recipe.id %}">{{ recipe.name }}</a></td>
-              <td class="cousine"><span>Italy</span></td>
-              <td class="ingredients"><span>Recipe ingredients will be here</span></td>
-            </tr>
-          {% endfor %}
-          </tbody>
-        </table>
-      </section>
-    {% else %}
-      <p class="no-data-available">No recipes are available.</p>
-    {% endif %}
+            <tbody>
+            {% for recipe in recipes %}
+              <tr>
+                <td class="name"><a href="{% url 'recipe' recipe.id %}">{{ recipe.name }}</a></td>
+                <td class="cuisine"><span>{{ recipe.cuisine }}</span></td>
+                <td class="ingredients">
+                  {% for ingredient in recipe.ingredients.all %}
+                    <div class="ingredient">{{ ingredient.name }}</div>
+                  {% endfor %}
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </section>
+      {% else %}
+        <p class="no-data-available">No recipes are available.</p>
+      {% endif %}
     </main>
 
     <div class="divider divider-1"></div>

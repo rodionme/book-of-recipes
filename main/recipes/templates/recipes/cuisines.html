@@ -1,0 +1,15 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}Cuisines{% endblock %}
+
+{% block content %}
+    {% if cuisines %}
+        <ul>
+        {% for cuisine in cuisines %}
+            <li><a href="{% url 'cuisine' cuisine.id %}">{{ cuisine.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No cuisines are available.</p>
+    {% endif %}
+{% endblock %}
