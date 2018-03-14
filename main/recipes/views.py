@@ -1,11 +1,6 @@
-from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
 from .models import Recipe, Ingredient, Cuisine
-
-
-def index(request):
-    return render(request, 'recipes/index.html')
 
 
 class RecipesView(generic.ListView):
