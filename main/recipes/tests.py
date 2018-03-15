@@ -1,13 +1,20 @@
 from django.test import TestCase
 from django.urls import reverse
-from .models import Recipe, Ingredient
+from .models import Recipe, Cuisine, Ingredient
 
 
-def create_recipe(name, description, ingredients):
+def create_recipe(name, cuisine, description):
     """
-    Create an recipe with the given name, description and list of ingredients
+    Create an recipe with the given name, cuisine, description
     """
-    return Recipe.objects.create(name=name, description=description, ingredients=ingredients)
+    return Recipe.objects.create(name=name, cuisine=cuisine, description=description)
+
+
+def create_cuisine(name):
+    """
+    Create a cuisine with the given name
+    """
+    return Cuisine.objects.create(name=name)
 
 
 def create_ingredient(name):
@@ -32,13 +39,36 @@ class RecipesViewTest(TestCase):
         """
         The recipes page may display recipe
         """
-        pass
+        cuisine_1 = create_cuisine(name='Cuisine 1')
+        ingredient_1 = create_ingredient(name='Ingredient 1')
+
+        recipe_1 = create_recipe(name='Recipe 1', cuisine=cuisine_1, description='Desc for recipe 1')
+        recipe_1.ingredients.set([ingredient_1])
+
+        response = self.client.get(reverse('recipes'))
+
+        self.assertQuerysetEqual(response.context['recipes'], ['<Recipe: Recipe 1>'])
+        # TODO: Check ingredients list of recipe
 
     def test_two_recipes(self):
         """
         The recipes page may display multiple recipes
         """
-        pass
+        cuisine_1 = create_cuisine(name='Cuisine 1')
+
+        ingredient_1 = create_ingredient(name='Ingredient 1')
+        ingredient_2 = create_ingredient(name='Ingredient 2')
+
+        recipe_1 = create_recipe(name='Recipe 1', cuisine=cuisine_1, description='Desc for recipe 1')
+        recipe_1.ingredients.set([ingredient_1])
+
+        recipe_2 = create_recipe(name='Recipe 2', cuisine=cuisine_1, description='Desc for recipe 2')
+        recipe_2.ingredients.set([ingredient_1, ingredient_2])
+
+        response = self.client.get(reverse('recipes'))
+
+        self.assertQuerysetEqual(response.context['recipes'],
+                                 ['<Recipe: Recipe 1>', '<Recipe: Recipe 2>'], ordered=False)
 
 
 class IngredientsViewTest(TestCase):
