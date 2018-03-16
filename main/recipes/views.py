@@ -8,7 +8,19 @@ class RecipesView(generic.ListView):
     context_object_name = 'recipes'
 
     def get_queryset(self):
-        return Recipe.objects.all()
+        recipes = Recipe.objects.all()
+        ingredients = self.request.GET.getlist('ingredient[]')
+        cuisines = self.request.GET.getlist('cuisine[]')
+
+        if ingredients:
+            for ingredient_id in ingredients:
+                recipes = recipes.filter(ingredients__pk=ingredient_id)
+
+        if cuisines:
+            for cuisine_id in cuisines:
+                recipes = recipes.filter(cuisine__pk=cuisine_id)
+
+        return recipes
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
