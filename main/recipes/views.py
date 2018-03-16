@@ -9,8 +9,8 @@ class RecipesView(generic.ListView):
 
     def get_queryset(self):
         recipes = Recipe.objects.all()
-        ingredients = self.request.GET.getlist('ingredient[]')
-        cuisines = self.request.GET.getlist('cuisine[]')
+        ingredients = self.request.GET.getlist('i')
+        cuisines = self.request.GET.getlist('c')
 
         if ingredients:
             for ingredient_id in ingredients:
@@ -26,6 +26,9 @@ class RecipesView(generic.ListView):
         context = super().get_context_data(**kwargs)
         context['ingredients'] = Ingredient.objects.all()
         context['cuisines'] = Cuisine.objects.all()
+
+        context['selected_cuisines'] = [int(cuisine_id) for cuisine_id in self.request.GET.getlist('c')]
+        context['selected_ingredients'] = [int(ingredient_id) for ingredient_id in self.request.GET.getlist('i')]
 
         return context
 

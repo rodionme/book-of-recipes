@@ -64,22 +64,31 @@
 
     <aside class="filters">
       <form action="" method="get">
-        <h4>Cuisines</h4>
+        <section class="filter-group">
+          <h4>Cuisines</h4>
 
-        <ul class="filter-list">
-          {% for cuisine in cuisines %}
-            <li><label><input type="checkbox" name="cuisine[]" value="{{ cuisine.id }}"><span>{{ cuisine.name }}</span></label></li>
-          {% endfor %}
-        </ul>
+          <ul class="filter-list">
+            {% for cuisine in cuisines %}
+              <li><label>
+                <input type="checkbox" name="c" value="{{ cuisine.id }}" {% if cuisine.id in selected_cuisines %}checked{% endif %}>
+                <span>{{ cuisine.name }}</span>
+              </label></li>
+            {% endfor %}
+          </ul>
+        </section>
 
+        <section class="filter-group">
+          <h4>Ingredients</h4>
 
-        <h4>Ingredients</h4>
-
-        <ul class="filter-list">
-          {% for ingredient in ingredients %}
-            <li><label><input type="checkbox" name="ingredient[]" value="{{ ingredient.id }}"><span>{{ ingredient.name }}</span></label></li>
-          {% endfor %}
-        </ul>
+          <ul class="filter-list">
+            {% for ingredient in ingredients %}
+              <li><label>
+                <input type="checkbox" name="i" value="{{ ingredient.id }}" {% if ingredient.id in selected_ingredients %}checked{% endif %}>
+                <span>{{ ingredient.name }}</span>
+              </label></li>
+            {% endfor %}
+          </ul>
+        </section>
 
         <button type="submit">Apply</button>
       </form>
