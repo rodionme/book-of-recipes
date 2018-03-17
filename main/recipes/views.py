@@ -1,5 +1,6 @@
 from django.urls import reverse
 from django.views import generic
+from django.db.models import Count
 from .models import Recipe, Ingredient, Cuisine
 
 
@@ -10,15 +11,12 @@ class RecipesView(generic.ListView):
     def get_queryset(self):
         recipes = Recipe.objects.all()
         ingredients = self.request.GET.getlist('i')
-        cuisines = self.request.GET.getlist('c')
 
         if ingredients:
-            for ingredient_id in ingredients:
-                recipes = recipes.filter(ingredients__pk=ingredient_id)
-
-        if cuisines:
-            for cuisine_id in cuisines:
-                recipes = recipes.filter(cuisine__pk=cuisine_id)
+            recipes = recipes\
+                .filter(ingredients__pk__in=ingredients)\
+                .annotate(ingredients_count=Count('ingredients'))\
+                .order_by('-ingredients_count')
 
         return recipes
 
