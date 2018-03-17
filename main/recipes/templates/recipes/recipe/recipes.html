@@ -22,6 +22,7 @@
       <ul class="menu-items-list">
         <li><a href="{% url 'ingredients' %}">Ingredients</a></li>
         <li><a href="{% url 'cuisines' %}">Cuisines</a></li>
+        <li><a href="{% url 'categories' %}">Categories</a></li>
       </ul>
     </div>
   </header>
@@ -34,19 +35,21 @@
         <section class="table-wrapper">
           <table class="recipes-table">
             <thead>
-            <tr>
-              <th class="col-name">Name</th>
-              <th class="col-cuisine">Cuisine</th>
-              <th class="col-ingredients">Ingredients</th>
-            </tr>
+              <tr>
+                <th class="col-name">Name</th>
+                <th class="col-category">Category</th>
+                <th class="col-cuisine">Cuisine</th>
+                <th class="col-ingredients">Ingredients</th>
+              </tr>
             </thead>
 
             <tbody>
             {% for recipe in recipes %}
               <tr>
-                <td class="name"><a href="{% url 'recipe' recipe.id %}">{{ recipe.name }}</a></td>
-                <td class="cuisine"><span>{{ recipe.cuisine }}</span></td>
-                <td class="ingredients">
+                <td class="col-name name"><a href="{% url 'recipe' recipe.id %}">{{ recipe.name }}</a></td>
+                <td class="col-category category"><span>{{ recipe.category }}</span></td>
+                <td class="col-cuisine cuisine"><span>{{ recipe.cuisine }}</span></td>
+                <td class="col-ingredients ingredients">
                   {% for ingredient in recipe.ingredients.all %}
                     <div class="ingredient">{{ ingredient.name }}</div>
                   {% endfor %}

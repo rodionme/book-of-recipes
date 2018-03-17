@@ -1,11 +1,11 @@
 from django.urls import reverse
 from django.views import generic
 from django.db.models import Count
-from .models import Recipe, Ingredient, Cuisine
+from .models import Recipe, Ingredient, Cuisine, Category
 
 
 class RecipesView(generic.ListView):
-    template_name = 'recipes/recipes.html'
+    template_name = 'recipes/recipe/recipes.html'
     context_object_name = 'recipes'
 
     def get_queryset(self):
@@ -35,20 +35,20 @@ class RecipesView(generic.ListView):
 
 class RecipeView(generic.DetailView):
     model = Recipe
-    template_name = 'recipes/recipe.html'
+    template_name = 'recipes/recipe/recipe.html'
 
 
 class RecipeUpdate(generic.UpdateView):
     model = Recipe
     fields = ['name', 'cuisine', 'description', 'ingredients']
-    template_name = 'recipes/edit-recipe.html'
+    template_name = 'recipes/recipe/edit-recipe.html'
 
     def get_success_url(self):
         return reverse('recipe', args=(self.object.id,))
 
 
 class IngredientsView(generic.ListView):
-    template_name = 'recipes/ingredients.html'
+    template_name = 'recipes/ingredient/ingredients.html'
     context_object_name = 'ingredients'
 
     def get_queryset(self):
@@ -57,20 +57,20 @@ class IngredientsView(generic.ListView):
 
 class IngredientView(generic.DetailView):
     model = Ingredient
-    template_name = 'recipes/ingredient.html'
+    template_name = 'recipes/ingredient/ingredient.html'
 
 
 class IngredientUpdate(generic.UpdateView):
     model = Ingredient
     fields = ['name']
-    template_name = 'recipes/edit-ingredient.html'
+    template_name = 'recipes/ingredient/edit-ingredient.html'
 
     def get_success_url(self):
         return reverse('ingredient', args=(self.object.id,))
 
 
 class CuisinesView(generic.ListView):
-    template_name = 'recipes/cuisines.html'
+    template_name = 'recipes/cuisine/cuisines.html'
     context_object_name = 'cuisines'
 
     def get_queryset(self):
@@ -79,13 +79,35 @@ class CuisinesView(generic.ListView):
 
 class CuisineView(generic.DetailView):
     model = Cuisine
-    template_name = 'recipes/cuisine.html'
+    template_name = 'recipes/cuisine/cuisine.html'
 
 
 class CuisineUpdate(generic.UpdateView):
     model = Cuisine
     fields = ['name']
-    template_name = 'recipes/edit-cuisine.html'
+    template_name = 'recipes/cuisine/edit-cuisine.html'
 
     def get_success_url(self):
         return reverse('cuisine', args=(self.object.id,))
+
+
+class CategoriesView(generic.ListView):
+    template_name = 'recipes/category/categories.html'
+    context_object_name = 'categories'
+
+    def get_queryset(self):
+        return Category.objects.all()
+
+
+class CategoryView(generic.DetailView):
+    model = Category
+    template_name = 'recipes/category/category.html'
+
+
+class CategoryUpdate(generic.UpdateView):
+    model = Category
+    fields = ['name']
+    template_name = 'recipes/category/edit-category.html'
+
+    def get_success_url(self):
+        return reverse('category', args=(self.object.id,))

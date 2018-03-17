@@ -315,13 +315,18 @@ td {
   width: 40%;
 }
 
+.col-category {
+  width: 10%;
+  min-width: 100px;
+}
+
 .col-cuisine {
   width: 10%;
   min-width: 100px;
 }
 
 .col-ingredients {
-  width: 50%;
+  width: 40%;
 }
 
 .recipes-table a {

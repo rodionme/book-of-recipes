@@ -15,4 +15,8 @@ urlpatterns = [
     path('cuisines/', views.CuisinesView.as_view(), name='cuisines'),
     path('cuisines/<int:pk>/', views.CuisineView.as_view(), name='cuisine'),
     path('cuisines/<int:pk>/edit', views.CuisineUpdate.as_view(), name='edit_cuisine'),
+
+    path('categories/', views.CategoriesView.as_view(), name='categories'),
+    path('categories/<int:pk>/', views.CategoryView.as_view(), name='category'),
+    path('categories/<int:pk>/edit', views.CategoryUpdate.as_view(), name='edit_category'),
 ]

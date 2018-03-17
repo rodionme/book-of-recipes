@@ -1,0 +1,9 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+  <p>Name: {{ category.name }}</p>
+
+  <a href="{% url 'edit_category' category.id %}">Edit</a>
+{% endblock %}
