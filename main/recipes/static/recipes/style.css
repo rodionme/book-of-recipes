@@ -3,11 +3,16 @@ body {
   height: 100%;
 }
 
+html {
+  overflow: auto;
+}
+
 body {
   display: flex;
   flex-direction: column;
   min-width: 780px;
-  min-height: 600px;
+  min-height: 450px;
+  overflow: hidden;
   margin: 0;
   font-size: 16px;
   font-family: "Caveat", sans-serif;
@@ -27,6 +32,19 @@ input,
 button {
   font-family: inherit;
   outline: none;
+}
+
+button {
+  padding: 4px 24px;
+  border: none;
+  border-radius: 13px;
+  font-size: 100%;
+  background-color: #d1d65b;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
 }
 
 
@@ -63,7 +81,7 @@ button {
 }
 
 .logo {
-  font-size: 150%;
+  font-size: 250%;
   text-decoration: none;
 }
 
@@ -71,9 +89,7 @@ button {
 /*******************************/
 /* SEARCH                      */
 /*******************************/
-.search-wrapper {
-
-}
+.search-wrapper {}
 
 .search {
   width: 100%;
@@ -189,19 +205,34 @@ button {
 }
 
 .menu-items-list {
-  display: none;
   position: absolute;
   top: 100%;
-  right: 0;
+  right: 14px;
   list-style: none;
   margin: 0;
-  padding-left: 0;
-  border: 1px solid #ccc;
+  padding: 10px 30px;
+  box-shadow: -1px 2px 4px rgba(0, 0, 0, .3);
+  font-size: 160%;
   background-color: #fff;
+  transform: translateX(20em);
+  transition: all 0.3s ease;
+}
+
+.menu-items-list li {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.menu-items-list a {
+  text-decoration: none;
+}
+
+.menu-items-list a:hover {
+  text-decoration: underline;
 }
 
 .hamburger.is-active + .menu-items-list {
-  display: block;
+  transform: translateX(0);
 }
 
 
@@ -211,6 +242,7 @@ button {
 .content {
   display: flex;
   flex-grow: 1;
+  overflow: hidden;
   padding: 40px 40px;
 }
 
@@ -301,7 +333,13 @@ td {
 }
 
 .ingredients {
-  font-size: 70%;
+  display: flex;
+  align-items: center;
+  font-size: 75%;
+}
+
+.ingredient + .ingredient:before {
+  content: ', ';
 }
 
 
@@ -315,8 +353,32 @@ td {
   font-size: 150%;
 }
 
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 16px;
+}
+
 .filter-list {
+  overflow: auto;
   list-style: none;
   margin: 0;
   padding-left: 0;
+}
+
+.filter-apply {
+  flex-shrink: 0;
+  align-self: left;
+  margin-top: 26px;
 }
