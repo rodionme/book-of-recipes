@@ -7,7 +7,9 @@
     <a href="/" class="logo">Book of Recipes</a>
 
     <div class="search-wrapper">
-      <input class="search" type="text" placeholder="Input recipe name"/>
+      <form action="" class="search-form">
+        <input class="search" name="q" type="text" {% if query %}value="{{ query }}"{% endif %} placeholder="Input recipe name"/>
+      </form>
     </div>
 
     <div class="main-menu">
@@ -62,7 +64,7 @@
     <div class="divider divider-1"></div>
 
     <aside class="filters">
-      <form action="" method="get">
+      <form action="">
         <section class="filter-group">
           <h4>Ingredients</h4>
 
