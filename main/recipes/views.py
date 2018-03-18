@@ -38,13 +38,30 @@ class RecipeView(generic.DetailView):
     template_name = 'recipes/recipe/recipe.html'
 
 
-class RecipeUpdate(generic.UpdateView):
+class RecipeCreateView(generic.CreateView):
     model = Recipe
-    fields = ['name', 'cuisine', 'description', 'ingredients']
+    fields = ['name', 'category', 'cuisine', 'description', 'ingredients']
+    template_name = 'recipes/recipe/edit-recipe.html'
+
+    def get_success_url(self):
+        return reverse('recipes')
+
+
+class RecipeUpdateView(generic.UpdateView):
+    model = Recipe
+    fields = ['name', 'category', 'cuisine', 'description', 'ingredients']
     template_name = 'recipes/recipe/edit-recipe.html'
 
     def get_success_url(self):
         return reverse('recipe', args=(self.object.id,))
+
+
+class RecipeDeleteView(generic.DeleteView):
+    model = Recipe
+    template_name = 'recipes/recipe/delete-recipe.html'
+
+    def get_success_url(self):
+        return reverse('recipes')
 
 
 class IngredientsView(generic.ListView):
@@ -60,13 +77,30 @@ class IngredientView(generic.DetailView):
     template_name = 'recipes/ingredient/ingredient.html'
 
 
-class IngredientUpdate(generic.UpdateView):
+class IngredientCreateView(generic.CreateView):
+    model = Ingredient
+    fields = ['name']
+    template_name = 'recipes/ingredient/edit-ingredient.html'
+
+    def get_success_url(self):
+        return reverse('ingredients')
+
+
+class IngredientUpdateView(generic.UpdateView):
     model = Ingredient
     fields = ['name']
     template_name = 'recipes/ingredient/edit-ingredient.html'
 
     def get_success_url(self):
         return reverse('ingredient', args=(self.object.id,))
+
+
+class IngredientDeleteView(generic.DeleteView):
+    model = Ingredient
+    template_name = 'recipes/ingredient/delete-ingredient.html'
+
+    def get_success_url(self):
+        return reverse('ingredients')
 
 
 class CuisinesView(generic.ListView):
@@ -82,13 +116,30 @@ class CuisineView(generic.DetailView):
     template_name = 'recipes/cuisine/cuisine.html'
 
 
-class CuisineUpdate(generic.UpdateView):
+class CuisineCreateView(generic.CreateView):
+    model = Cuisine
+    fields = ['name']
+    template_name = 'recipes/cuisine/edit-cuisine.html'
+
+    def get_success_url(self):
+        return reverse('cuisines')
+
+
+class CuisineUpdateView(generic.UpdateView):
     model = Cuisine
     fields = ['name']
     template_name = 'recipes/cuisine/edit-cuisine.html'
 
     def get_success_url(self):
         return reverse('cuisine', args=(self.object.id,))
+
+
+class CuisineDeleteView(generic.DeleteView):
+    model = Cuisine
+    template_name = 'recipes/cuisine/delete-cuisine.html'
+
+    def get_success_url(self):
+        return reverse('cuisines')
 
 
 class CategoriesView(generic.ListView):
@@ -104,10 +155,27 @@ class CategoryView(generic.DetailView):
     template_name = 'recipes/category/category.html'
 
 
-class CategoryUpdate(generic.UpdateView):
+class CategoryCreateView(generic.CreateView):
+    model = Category
+    fields = ['name']
+    template_name = 'recipes/category/edit-category.html'
+
+    def get_success_url(self):
+        return reverse('categories')
+
+
+class CategoryUpdateView(generic.UpdateView):
     model = Category
     fields = ['name']
     template_name = 'recipes/category/edit-category.html'
 
     def get_success_url(self):
         return reverse('category', args=(self.object.id,))
+
+
+class CategoryDeleteView(generic.DeleteView):
+    model = Category
+    template_name = 'recipes/category/delete-category.html'
+
+    def get_success_url(self):
+        return reverse('categories')

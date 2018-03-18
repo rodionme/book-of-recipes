@@ -6,4 +6,5 @@
   <p>Name: {{ category.name }}</p>
 
   <a href="{% url 'edit_category' category.id %}">Edit</a>
+  <a href="{% url 'delete_category' category.id %}">Delete</a>
 {% endblock %}

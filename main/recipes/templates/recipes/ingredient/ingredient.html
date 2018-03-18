@@ -6,4 +6,5 @@
   <p>Name: {{ ingredient.name }}</p>
 
   <a href="{% url 'edit_ingredient' ingredient.id %}">Edit</a>
+  <a href="{% url 'delete_ingredient' ingredient.id %}">Delete</a>
 {% endblock %}

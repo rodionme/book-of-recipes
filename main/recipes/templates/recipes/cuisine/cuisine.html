@@ -6,4 +6,5 @@
   <p>Name: {{ cuisine.name }}</p>
 
   <a href="{% url 'edit_cuisine' cuisine.id %}">Edit</a>
+  <a href="{% url 'delete_cuisine' cuisine.id %}">Delete</a>
 {% endblock %}
