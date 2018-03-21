@@ -358,8 +358,17 @@ td {
   font-size: 75%;
 }
 
-.ingredient + .ingredient:before {
+.ingredient + .ingredient::before {
   content: ', ';
+}
+
+.ingredient.missing,
+.ingredient.missing + .ingredient::before {
+  color: #ccc;
+}
+
+.ingredient.missing::before {
+  color: #333;
 }
 
 

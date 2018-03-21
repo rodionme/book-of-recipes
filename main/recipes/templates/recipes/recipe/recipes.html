@@ -53,7 +53,11 @@
                 <td class="col-cuisine cuisine"><span>{{ recipe.cuisine }}</span></td>
                 <td class="col-ingredients ingredients">
                   {% for ingredient in recipe.ingredients.all %}
-                    <div class="ingredient">{{ ingredient.name }}</div>
+                    {% if not selected_ingredients or selected_ingredients and ingredient.id in selected_ingredients %}
+                      <div class="ingredient">{{ ingredient.name }}</div>
+                    {% else %}
+                      <div class="ingredient missing">{{ ingredient.name }}</div>
+                    {% endif %}
                   {% endfor %}
                 </td>
               </tr>
