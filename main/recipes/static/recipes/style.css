@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
@@ -11,10 +15,10 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 780px;
-  min-height: 450px;
+  min-height: 500px;
   overflow: hidden;
   margin: 0;
-  font-size: 16px;
+  font-size: 20px;
   font-family: "Caveat", sans-serif;
   color: #333;
   background-color: #fffeef;
@@ -45,6 +49,10 @@ button {
 
 button:hover {
   opacity: 0.8;
+}
+
+p {
+  white-space: pre-wrap;
 }
 
 ::-webkit-scrollbar {
@@ -92,11 +100,12 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 40px;
+  flex-shrink: 0;
+  padding: 40px;
 }
 
 .logo {
-  font-size: 250%;
+  font-size: 200%;
   text-decoration: none;
 }
 
@@ -104,7 +113,9 @@ button:hover {
 /*******************************/
 /* SEARCH                      */
 /*******************************/
-.search-wrapper {}
+.search-wrapper {
+  width: 250px;
+}
 
 .search {
   width: 100%;
@@ -114,7 +125,7 @@ button:hover {
   border-bottom: 1px solid #eee;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, .39), 0 -1px 1px #fff, 0 1px 0 #fff;
   border-radius: 45px;
-  font-size: 150%;
+  font-size: 100%;
   background-color: #fff;
 }
 
@@ -127,7 +138,7 @@ button:hover {
 }
 
 .hamburger {
-  padding: 15px 15px;
+  padding: 15px;
   display: inline-block;
   cursor: pointer;
   transition-property: opacity, filter;
@@ -227,7 +238,7 @@ button:hover {
   margin: 0;
   padding: 10px 30px;
   box-shadow: -1px 2px 4px rgba(0, 0, 0, .3);
-  font-size: 160%;
+  font-size: 125%;
   background-color: #fff;
   transform: translateX(20em);
   transition: all 0.3s ease;
@@ -239,6 +250,7 @@ button:hover {
 }
 
 .menu-items-list a {
+  white-space: nowrap;
   text-decoration: none;
 }
 
@@ -258,11 +270,12 @@ button:hover {
   display: flex;
   flex-grow: 1;
   overflow: hidden;
-  padding: 40px 40px;
+  padding: 40px;
 }
 
 .main-content {
   flex-grow: 1;
+  overflow: auto;
   padding-right: 40px;
 }
 
@@ -289,6 +302,7 @@ table * {
 thead {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   align-items: stretch;
   overflow-y: scroll;
   padding-bottom: 20px;
@@ -306,8 +320,12 @@ tbody > tr {
   flex-wrap: nowrap;
 }
 
-thead {
-  flex-shrink: 0;
+tbody > tr + tr {
+  margin-top: 10px;
+}
+
+tbody > tr:nth-child(odd) {
+  background-color: #f2f1e2;
 }
 
 th,
@@ -319,7 +337,7 @@ td {
 }
 
 .recipes-table {
-  font-size: 150%;
+  font-size: 125%;
 }
 
 .recipes-table th {
@@ -352,14 +370,12 @@ td {
   text-decoration: underline;
 }
 
-.ingredients {
-  display: flex;
-  align-items: center;
-  font-size: 75%;
+.ingredient::after {
+  content: ', ';
 }
 
-.ingredient + .ingredient::before {
-  content: ', ';
+.ingredient:last-child::after {
+  content: '';
 }
 
 .ingredient.missing,
@@ -376,10 +392,10 @@ td {
 /* FILTERS                     */
 /*******************************/
 .filters {
-  width: 200px;
+  width: 300px;
   flex-shrink: 0;
   padding-left: 40px;
-  font-size: 150%;
+  font-size: 125%;
 }
 
 .filter-form {

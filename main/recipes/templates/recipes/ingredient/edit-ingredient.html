@@ -3,15 +3,17 @@
 {% block title %}{{ ingredient.name }}{% endblock %}
 
 {% block content %}
-  {% if error_message %}
-    <p>{{ error_message }}</p>
-  {% endif %}
+  <main class="main-content">
+    {% if error_message %}
+      <p>{{ error_message }}</p>
+    {% endif %}
 
-  <form action="" method="post">
-    {% csrf_token %}
+    <form action="" method="post">
+      {% csrf_token %}
 
-    {{ form.as_p }}
+      {{ form.as_p }}
 
-    <button type="submit">Save</button>
-  </form>
+      <button type="submit">Save</button>
+    </form>
+  </main>
 {% endblock %}
