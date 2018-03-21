@@ -57,6 +57,9 @@
         <h4 class="filter-title">Ingredients</h4>
 
         <ul class="filter-list">
+          {# TODO: Pull up selected ingredients to top of the list #}
+          {# TODO: Add filtering input field for a quick finding of ingredient #}
+
           {% for ingredient in ingredients %}
             <li><label>
               <input type="checkbox" name="i" value="{{ ingredient.id }}" {% if ingredient.id in selected_ingredients %}checked{% endif %}>

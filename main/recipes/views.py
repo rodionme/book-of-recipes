@@ -22,6 +22,8 @@ class RecipesView(generic.ListView):
                 .annotate(ingredients_count=Count('ingredients'))\
                 .order_by('-ingredients_count')
 
+            # TODO: Implement additional ascending sorting by number of missing ingredients
+
         return recipes
 
     def get_context_data(self, *, object_list=None, **kwargs):
